@@ -12,16 +12,19 @@ version = "0.24.1"
 edition = "2018"
 
 [dependencies]
-cairo-rs = { git = "https://github.com/gtk-rs/gtk-rs-core" }
+cairo-rs = "0.18.5"
 fragile = "2.0"
-gio = { git = "https://github.com/gtk-rs/gtk-rs-core" }
-glib = { git = "https://github.com/gtk-rs/gtk-rs-core" }
-glib-sys = { git = "https://github.com/gtk-rs/gtk-rs-core" }
-gobject-sys = { git = "https://github.com/gtk-rs/gtk-rs-core" }
-gtk = { git = "https://github.com/nikescar/gtk3-rs.git", version = "0.19.0" }
+gio = "0.18.4"
+glib = "0.18.5"
+glib-sys = "0.18.1"
+gobject-sys = "0.18.0"
+gtk = "0.18.2"
 libc = "^0.2.54"
 log = "^0.4.6"
 target-lexicon = "0.13.3"
+
+[dev-dependencies]
+relm-derive = { path = "./relm-derive" }
 
 [features]
 hidpi = []

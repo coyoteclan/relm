@@ -128,7 +128,7 @@ impl<W: Clone + WidgetExt> DrawHandler<W> {
         let draw_surface = self.draw_surface.clone();
         widget.connect_draw(move |_, context| {
             // TODO: only copy the area that was exposed?
-            if let Err(error) = context.set_source_surface(&draw_surface.get(), 0.0, 0.0) {
+            if let Err(error) = context.set_source_surface(draw_surface.get(), 0.0, 0.0) {
                 eprintln!("Cannot set source surface: {:?}", error);
             }
 

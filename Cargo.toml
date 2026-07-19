@@ -9,7 +9,7 @@ name = "relm"
 readme = "README.adoc"
 repository = "https://github.com/antoyo/relm"
 version = "0.24.1"
-edition = "2018"
+edition = "2024"
 
 [dependencies]
 cairo-rs = "0.18.5"

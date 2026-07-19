@@ -38,7 +38,7 @@
 //! More info can be found in the [readme](https://github.com/antoyo/relm#relm).
 
 #![allow(unknown_lints)]
-#![allow(clippy::new_without_default, clippy::uninlined_format_args)]
+#![allow(clippy::new_without_default, clippy::uninlined_format_args, clippy::doc_lazy_continuation)]
 
 #![warn(
     missing_docs,

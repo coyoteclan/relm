@@ -67,22 +67,25 @@ pub fn source_get<T: SourceFuncs>(source: &Source) -> &T {
 }
 
 unsafe extern "C" fn check<T: SourceFuncs>(source: *mut GSource) -> c_int {
+    // SAFETY: The caller guarantees that `source` is a valid pointer to a SourceData<T>.
     let object = source as *mut SourceData<T>;
-    bool_to_int((*object).data.check())
+    bool_to_int(unsafe { (*object).data.check() })
 }
 
 unsafe extern "C" fn dispatch<T: SourceFuncs>(source: *mut GSource, _callback: GSourceFunc, _user_data: *mut libc::c_void)
     -> c_int
 {
+    // SAFETY: The caller guarantees that `source` is a valid pointer to a SourceData<T>.
     let object = source as *mut SourceData<T>;
-    bool_to_int((*object).data.dispatch())
+    bool_to_int(unsafe { (*object).data.dispatch() })
 }
 
 unsafe extern "C" fn finalize<T: SourceFuncs>(source: *mut GSource) {
     // TODO: needs a bomb to abort on panic
+    // SAFETY: The caller guarantees that `source` is a valid pointer to a SourceData<T>.
     let source = source as *mut SourceData<T>;
-    ptr::read(&(*source).funcs);
-    ptr::read(&(*source).data);
+    unsafe { ptr::read(&(*source).funcs) };
+    unsafe { ptr::read(&(*source).data) };
 }
 
 extern "C" fn prepare<T: SourceFuncs>(source: *mut GSource, timeout: *mut c_int) -> c_int {

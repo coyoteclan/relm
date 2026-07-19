@@ -95,7 +95,7 @@ macro_rules! relm_observer_new {
             else {
                 false
             }
-        );
+        )
     };
 }
 

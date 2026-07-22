@@ -51,7 +51,8 @@ impl<'ast> Visit<'ast> for ModelVariableVisitor {
                 && let Expr::Path(ExprPath { ref path, .. }) = **expr
                     && let Named(ref model_ident) = *model_ident
                         && path.is_ident(&dummy_ident("self")) && model_ident == "model"
-                            && let Named(ref field) = *field {
+                            && let Named(ref field) = *field
+        {
                                 self.idents.push(field.clone());
                             }
         visit_expr(self, expr);

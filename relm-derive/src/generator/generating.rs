@@ -41,7 +41,7 @@ use super::parser::{
     RelmWidget,
     Widget,
 };
-use super::parser::EventValue::{CurrentWidget, ForeignWidget, None_};
+use super::parser::EventValue::{CurrentWidget, ForeignWidget, NoValue};
 use super::parser::EventValueReturn::{CallReturn, Return, WithoutReturn};
 use super::parser::EitherWidget::{Gtk, Relm};
 use super::transformer::Transformer;
@@ -70,7 +70,7 @@ pub struct Gen {
     pub container_impl: TokenStream,
 }
 
-pub fn r#gen(name: &Ident, widgets: &[Widget], driver: &mut Driver) -> Gen {
+pub fn generate(name: &Ident, widgets: &[Widget], driver: &mut Driver) -> Gen {
     let mut generator = Generator::new(driver);
     let mut widget_tokens = quote! {};
     for (index, widget) in widgets.iter().enumerate() {
@@ -291,7 +291,7 @@ impl<'a> Generator<'a> {
                     #shared_values
                     relm::connect!(relm, #widget_name, #event_ident(#(#event_params),*), #metadata #func);
                 }},
-                None_ => panic!("no event value"),
+                NoValue => panic!("no event value"),
             };
         self.events.push(connect);
     }
@@ -333,7 +333,7 @@ impl<'a> Generator<'a> {
                         }},
                         CurrentWidget(Return(_)) | CurrentWidget(CallReturn(_)) | ForeignWidget(_, Return(_)) |
                             ForeignWidget(_, CallReturn(_)) => unreachable!(),
-                        None_ => panic!("no event value"),
+                        NoValue => panic!("no event value"),
                     };
                 self.events.push(connect);
             }

@@ -93,7 +93,7 @@ pub enum EventValueReturn {
 pub enum EventValue {
     CurrentWidget(EventValueReturn),
     ForeignWidget(Ident, EventValueReturn),
-    None_,
+    NoValue,
 }
 
 #[derive(Debug)]
@@ -110,7 +110,7 @@ impl Event {
             params: vec![],
             shared_values: vec![],
             use_self: false,
-            value: None_,
+            value: NoValue,
         }
     }
 }

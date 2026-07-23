@@ -53,8 +53,8 @@ impl<'ast> Visit<'ast> for ModelVariableVisitor {
                         && path.is_ident(&dummy_ident("self")) && model_ident == "model"
                             && let Named(ref field) = *field
         {
-                                self.idents.push(field.clone());
-                            }
+            self.idents.push(field.clone());
+        }
         visit_expr(self, expr);
     }
 }

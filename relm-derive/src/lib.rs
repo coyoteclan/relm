@@ -27,7 +27,7 @@
 
 extern crate proc_macro;
 
-mod r#gen;
+mod generator;
 
 use quote::{quote, quote_spanned};
 use proc_macro2::TokenStream;
@@ -42,7 +42,7 @@ use syn::{
 };
 use syn::spanned::Spanned;
 
-use r#gen::{gen_widget, gen_where_clause, parser::dummy_ident};
+use generator::{gen_widget, gen_where_clause, parser::dummy_ident};
 
 #[proc_macro_derive(Msg)]
 pub fn msg(input: proc_macro::TokenStream) -> proc_macro::TokenStream {

@@ -28,7 +28,7 @@
 pub(crate) mod parser;
 
 mod adder;
-mod generator;
+mod generating;
 mod transformer;
 mod walker;
 
@@ -61,7 +61,7 @@ use syn::Type;
 use syn::visit::Visit;
 
 use self::adder::{Adder, Message, Property};
-pub use self::generator::gen_where_clause;
+pub use self::generating::gen_where_clause;
 use self::parser::EitherWidget::{Gtk, Relm};
 use self::parser::{Widget, WidgetList};
 use self::walker::ModelVariableVisitor;
@@ -441,7 +441,7 @@ impl Driver {
             self.collect_bindings(widget, &mut msg_model_map, &mut properties_model_map);
         }
 
-        let generator::Gen { view, relm_widgets, relm_components, streams_to_save, container_impl } = generator::r#gen(name, &widgets, self);
+        let generating::Gen { view, relm_widgets, relm_components, streams_to_save, container_impl } = generating::generate(name, &widgets, self);
         let model_ident = Ident::new(MODEL_IDENT, Span::call_site()); // TODO: maybe need to set Span here.
         let code = quote_spanned! { name.span() =>
             #[allow(unused_variables,clippy::all)] // Necessary to avoid warnings in case the parameters are unused.

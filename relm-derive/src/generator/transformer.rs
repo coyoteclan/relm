@@ -86,8 +86,9 @@ impl Fold for Transformer {
                     }
                 }
             },
-            Expr::Macro(ExprMacro { mac: Macro { ref path, ref tokens, .. }, .. })
-                if path.is_ident(&dummy_ident("view")) => {
+            #[allow(clippy::collapsible_match)]
+            Expr::Macro(ExprMacro { mac: Macro { ref path, ref tokens, .. }, .. }) => {
+                if path.is_ident(&dummy_ident("view")) {
                     self.nested_widgets.push(tokens.clone());
                     let counter = COUNTER.with(|counter| {
                         counter.fetch_add(1, Ordering::SeqCst)
@@ -97,7 +98,8 @@ impl Fold for Transformer {
                         #widget_ident
                     };
                     return parse(tokens.into()).expect("widget name replacement for nested view! macro");
-                },
+                }
+            }
             _ => (),
         }
         fold_expr(self, expr)

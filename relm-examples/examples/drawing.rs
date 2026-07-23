@@ -55,18 +55,18 @@ struct Circle {
 
 impl Circle {
     fn generate() -> Self {
-        let mut r#gen = rand::thread_rng();
+        let mut g = rand::thread_rng();
         Circle {
-            x: r#gen.gen_range(20.0..500.0),
-            y: r#gen.gen_range(20.0..500.0),
+            x: g.gen_range(20.0..500.0),
+            y: g.gen_range(20.0..500.0),
             color: RGBA::new(
-                r#gen.gen_range(0.0..1.0),
-                r#gen.gen_range(0.0..1.0),
-                r#gen.gen_range(0.0..1.0),
+                g.gen_range(0.0..1.0),
+                g.gen_range(0.0..1.0),
+                g.gen_range(0.0..1.0),
                 1.0,
             ),
-            vx: r#gen.gen_range(1.0..5.0),
-            vy: r#gen.gen_range(1.0..5.0),
+            vx: g.gen_range(1.0..5.0),
+            vy: g.gen_range(1.0..5.0),
         }
     }
 }

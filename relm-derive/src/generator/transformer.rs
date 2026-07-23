@@ -86,7 +86,6 @@ impl Fold for Transformer {
                     }
                 }
             },
-            #[allow(clippy::collapsible_match)]
             Expr::Macro(ExprMacro { mac: Macro { ref path, ref tokens, .. }, .. }) => {
                 if path.is_ident(&dummy_ident("view")) {
                     self.nested_widgets.push(tokens.clone());

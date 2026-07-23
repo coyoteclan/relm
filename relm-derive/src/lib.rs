@@ -24,6 +24,7 @@
  */
 
 #![recursion_limit="256"]
+#![allow(clippy::collapsible_match)]
 
 extern crate proc_macro;
 
